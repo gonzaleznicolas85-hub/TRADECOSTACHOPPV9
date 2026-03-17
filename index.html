@@ -1,3 +1,60 @@
+<div id="loginScreen" style="
+  position:fixed;
+  inset:0;
+  background:#eef2f7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  font-family:Arial;
+">
+
+  <div style="
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    width:320px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    text-align:center;
+  ">
+
+    <h2 style="margin-bottom:20px;font-size:20px;font-weight:bold">
+      Acceso Sistema Comodatos
+    </h2>
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Contraseña"
+      style="
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        margin-bottom:15px;
+      "
+    />
+
+    <button
+      onclick="checkPassword()"
+      style="
+        width:100%;
+        padding:10px;
+        background:#003366;
+        color:white;
+        border:none;
+        border-radius:6px;
+        font-weight:bold;
+        cursor:pointer;
+      "
+    >
+      Ingresar
+    </button>
+
+    <p id="loginError" style="color:red;margin-top:10px;font-size:14px"></p>
+
+  </div>
+</div>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -735,3 +792,37 @@
   </script>
 </body>
 </html>
+
+<script>
+
+const PAGE_PASSWORD = "ChoppCosta2026";  // CAMBIAR CONTRASEÑA
+
+function checkPassword() {
+
+  const pass = document.getElementById("passwordInput").value;
+
+  if(pass === PAGE_PASSWORD){
+
+    document.getElementById("loginScreen").style.display = "none";
+
+    sessionStorage.setItem("comodatosAuth","ok");
+
+  }else{
+
+    document.getElementById("loginError").innerText = "Contraseña incorrecta";
+
+  }
+
+}
+
+window.onload = function(){
+
+  const auth = sessionStorage.getItem("comodatosAuth");
+
+  if(auth === "ok"){
+    document.getElementById("loginScreen").style.display = "none";
+  }
+
+}
+
+</script>
